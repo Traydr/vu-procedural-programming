@@ -1,7 +1,8 @@
 #include <iostream>
 
 // Description of task
-// Write a C++ program that convert a temperature from Centigrade to Fahrenheit.
+// Write a C++ program to read the value of an integer X and display the value of Y.
+// Y is 1 when X > 0, Y is 0 when X = 0 and Y is  -1 when X< 0.
 
 bool tryAgain() {
     char answer;
@@ -10,8 +11,8 @@ bool tryAgain() {
     return answer == 'y';
 }
 
-float read_int() {
-    float input{0};
+int read_int() {
+    int input{0};
     bool valid{false};
 
     do {
@@ -21,7 +22,7 @@ float read_int() {
         } else {
             std::cin.clear();
             std::cin.ignore();
-            std::cout << "Invalid input; please re-enter\n";
+            std::cout << "Invalid input; please re-enter.\n";
         }
     } while (!valid);
 
@@ -29,16 +30,16 @@ float read_int() {
 }
 
 int main() {
-    float celsius {0};
-    float fahrenheit {0};
+    int x{0};
 
     do {
-        std::cout << "Please enter a temperature in C\n";
-        celsius = read_int();
-        fahrenheit = (celsius * 9) / 5 + 32;
-        std::cout << celsius << "C in Fahrenheit is " << fahrenheit << "F\n";
-        celsius = 0;
-        fahrenheit = 0;
+        std::cout << "Enter x value\n";
+        x = read_int();
+
+        if (x < 0) std::cout << "y = " << -1 << "\n";
+        if (x == 0) std::cout << "y = " << 0 << "\n";
+        if (x > 0) std::cout << "y = " << 1 << "\n";
+
     } while (tryAgain());
 
     return 0;

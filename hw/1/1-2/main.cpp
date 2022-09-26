@@ -10,13 +10,30 @@ bool tryAgain() {
     return answer == 'y';
 }
 
+int read_int() {
+    int input{0};
+    bool valid{false};
+
+    do {
+        std::cin >> input;
+        if (std::cin.good()) {
+            valid = true;
+        } else {
+            std::cin.clear();
+            std::cin.ignore();
+            std::cout << "Invalid input; please re-enter\n";
+        }
+    } while (!valid);
+
+    return input;
+}
 
 int main() {
     int year{0};
 
     do {
         std::cout << "Please enter a year\n";
-        std::cin >> year;
+        year = read_int();
 
         // This calculation is according to Microsoft Office docs
         // https://learn.microsoft.com/en-us/office/troubleshoot/excel/determine-a-leap-year
