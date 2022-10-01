@@ -1,7 +1,7 @@
 #include <iostream>
 
 /* Task description
- * AVG electricity bill for each flat per month. Electricity used to light the building entrance during the night time.
+ * AVG electricity bill for each flat per month. Electricity used to light the building entrance during the nighttime.
  * Electricity price 0.24 EUR / kWh
  * LED lamp 20w
  * Lamps num = 3
