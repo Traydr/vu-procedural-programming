@@ -32,16 +32,12 @@ int main() {
 
         less:
         std::cout << "incorrect\n";
-        goto end;
+        continue;
         greater:
         std::cout << "correct\n";
-        goto end;
+        continue;
         equal:
         std::cout << "incorrect\n";
-        goto end;
-
-        end:
-        std::cout << "";
     } while (tryAgain());
     return 0;
 }
