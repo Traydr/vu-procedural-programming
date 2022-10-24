@@ -4,6 +4,7 @@
 // Write the program using C++. Program must calculate the area of trapezoid.
 // Use two different types of functions and variables (one integer, another float).
 // The name of both functions is the same Atrap.
+// For the same task use one function.
 
 const float Half = 0.5;
 
@@ -49,11 +50,8 @@ int ReadInt() {
   return input;
 }
 
-int ATrap(int a, int b, int height) {
-  return Half * (a + b) * height;
-}
-
-float ATrap(float a, float b, float height) {
+template <typename T>
+T ATrap(T a, T b, T height) {
   return Half * (a + b) * height;
 }
 
