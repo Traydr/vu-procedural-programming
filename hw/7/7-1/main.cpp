@@ -7,83 +7,102 @@
 
 const float Half = 0.5;
 
-bool TryAgain() {
-  char answer;
-  std::cout << "Would you like to try again? (y)\n";
-  std::cin >> answer;
-  return answer == 'y';
+bool TryAgain()
+{
+	char answer;
+	std::cout << "Would you like to try again? (y)\n";
+	std::cin >> answer;
+	return answer == 'y';
 }
-float ReadFloat() {
-  float input{0};
-  bool valid{false};
+float ReadFloat()
+{
+	float input{ 0 };
+	bool valid{ false };
 
-  do {
-    std::cin >> input;
-    if (std::cin.good()) {
-      valid = true;
-    } else {
-      std::cin.clear();
-      std::cin.ignore();
-      std::cout << "Invalid input; please re-enter.\n";
-    }
-  } while (!valid);
+	do
+	{
+		std::cin >> input;
+		if (std::cin.good())
+		{
+			valid = true;
+		}
+		else
+		{
+			std::cin.clear();
+			std::cin.ignore();
+			std::cout << "Invalid input; please re-enter.\n";
+		}
+	} while (!valid);
 
-  return input;
-}
-
-int ReadInt() {
-  int input{0};
-  bool valid{false};
-
-  do {
-    std::cin >> input;
-    if (std::cin.good()) {
-      valid = true;
-    } else {
-      std::cin.clear();
-      std::cin.ignore();
-      std::cout << "Invalid input; please re-enter.\n";
-    }
-  } while (!valid);
-
-  return input;
+	return input;
 }
 
-int ATrap(int a, int b, int height) {
-  return Half * (a + b) * height;
+int ReadInt()
+{
+	int input{ 0 };
+	bool valid{ false };
+
+	do
+	{
+		std::cin >> input;
+		if (std::cin.good())
+		{
+			valid = true;
+		}
+		else
+		{
+			std::cin.clear();
+			std::cin.ignore();
+			std::cout << "Invalid input; please re-enter.\n";
+		}
+	} while (!valid);
+
+	return input;
 }
 
-float ATrap(float a, float b, float height) {
-  return Half * (a + b) * height;
+int ATrap(int a, int b, int height)
+{
+	return Half * (a + b) * height;
 }
 
-int main() {
-  do {
-    char input;
-    bool useInt{false};
-    std::cout << "Would you like to use (i)nt or (f)loat?\n";
-    std::cin >> input;
+float ATrap(float a, float b, float height)
+{
+	return Half * (a + b) * height;
+}
 
-    if (input == 'i') {
-      useInt = true;
-    }
+int main()
+{
+	do
+	{
+		char input;
+		bool useInt{ false };
+		std::cout << "Would you like to use (i)nt or (f)loat?\n";
+		std::cin >> input;
 
-    std::cout << "Enter base a, then base b, lastly height\n";
+		if (input == 'i')
+		{
+			useInt = true;
+		}
 
-    if (useInt) {
-      int a{ReadInt()};
-      int b{ReadInt()};
-      int height{ReadInt()};
+		std::cout << "Enter base a, then base b, lastly height\n";
 
-      std::cout << "Area is " << ATrap(a, b, height) << "\n";
-    } else {
-      float a{ReadFloat()};
-      float b{ReadFloat()};
-      float height{ReadFloat()};
+		if (useInt)
+		{
+			int a{ ReadInt() };
+			int b{ ReadInt() };
+			int height{ ReadInt() };
 
-      std::cout << "Area is " << ATrap(a, b, height) << "\n";
-    }
-  } while (TryAgain());
+			std::cout << "Area is " << ATrap(a, b, height) << "\n";
+		}
+		else
+		{
+			float a{ ReadFloat() };
+			float b{ ReadFloat() };
+			float height{ ReadFloat() };
 
-  return 0;
+			std::cout << "Area is " << ATrap(a, b, height) << "\n";
+		}
+	} while (TryAgain());
+
+	return 0;
 }
