@@ -6,8 +6,7 @@
 // “b” is a member from second array zero line and zero column and so on)
 
 // Define the exact sizes of arrays
-const uint32_t SizeX{ 10 };
-const uint32_t SizeY{ 10 };
+const uint32_t MatSize{ 10 };
 
 bool tryAgain()
 {
@@ -17,38 +16,52 @@ bool tryAgain()
 	return answer == 'y';
 }
 
-void fillArrayWithNums(uint32_t arr[SizeX][SizeY])
+void fillArrayWithNums(uint32_t arr[MatSize][MatSize])
 {
-	for (int i{ 0 }; i < SizeX; i++)
+	for (int i{ 0 }; i < MatSize; i++)
 	{
-		for (int j{ 0 }; j < SizeY; j++)
+		for (int j{ 0 }; j < MatSize; j++)
 		{
 			arr[i][j] = rand() % 100;
 		}
 	}
 }
 
+void printArray(uint32_t arr[MatSize][MatSize]) {
+	for (int i{0}; i < MatSize; i++) {
+		for (int j{0}; j < MatSize; j++) {
+			std::cout << arr[i][j] << "\t";
+		}
+		std::cout << "\n";
+	}
+}
+
 int main()
 {
 	// Initialize 2 arrays with 0's
-	uint32_t arrA[SizeX][SizeY]{};
-	uint32_t arrB[SizeX][SizeY]{};
+	uint32_t arrA[MatSize][MatSize]{};
+	uint32_t arrB[MatSize][MatSize]{};
+	uint32_t output[MatSize][MatSize]{};
 
 	do
 	{
 		// Fill arrays
 		fillArrayWithNums(arrA);
-		fillArrayWithNums(arrB);
+		std::cout << "\tarray A\n";
+		printArray(arrA);
 
-		uint32_t sum{};
-		for (auto smallA : arrA)
-		{
-			for (auto smallB : arrB)
-			{
-				sum += *smallA + *smallB;
+		fillArrayWithNums(arrB);
+		std::cout << "\tarray B\n";
+		printArray(arrB);
+
+		for (int i{0}; i < MatSize; i++) {
+			for (int j{0}; j < MatSize; j++) {
+				output[i][j] = arrA[i][j] + arrB[i][j];
 			}
 		}
-		std::cout << "Here is the sum: " << sum << "\n";
+
+		std::cout << "\toutput array\n";
+		printArray(output);
 	} while (tryAgain());
 
 	return 0;

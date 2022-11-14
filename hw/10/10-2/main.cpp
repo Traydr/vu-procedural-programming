@@ -5,8 +5,7 @@
 // Calculate the average of lines and columns. Print the array and the averages of lines and columns in separate array.
 
 // Define the exact sizes of arrays
-const uint32_t SizeX{ 10 };
-const uint32_t SizeY{ 10 };
+const uint32_t MatSize{ 10 };
 
 bool tryAgain()
 {
@@ -16,36 +15,40 @@ bool tryAgain()
 	return answer == 'y';
 }
 
-void fillArrayWithNums(uint32_t arr[SizeX][SizeY])
+void fillArrayWithNums(uint32_t arr[MatSize][MatSize])
 {
-	for (int i{ 0 }; i < SizeX; i++)
+	for (int i{ 0 }; i < MatSize; i++)
 	{
-		for (int j{ 0 }; j < SizeY; j++)
+		for (int j{ 0 }; j < MatSize; j++)
 		{
 			arr[i][j] = rand() % 100;
 		}
 	}
 }
 
-void calcColumnSums(uint32_t arrA[SizeX][SizeY], uint32_t arrB[SizeX][SizeY], uint32_t output[SizeX])
+void calcColumnSums(uint32_t arrA[MatSize][MatSize], uint32_t arrB[MatSize][MatSize], uint32_t output[MatSize])
 {
-	for (int i{0}; i < SizeX; i++ ) {
-		uint32_t tempColumnSum{0};
+	for (int i{ 0 }; i < MatSize; i++)
+	{
+		uint32_t tempColumnSum{ 0 };
 
-		for (int j{0}; j < SizeY; j++) {
-			tempColumnSum += arrA[i][j] + arrB[i][j];
+		for (int j{ 0 }; j < MatSize; j++)
+		{
+			tempColumnSum += arrA[j][i] + arrB[j][i];
 		}
 
 		output[i] = tempColumnSum;
 	}
 }
 
-void calcRowSums(uint32_t arrA[SizeX][SizeY], uint32_t arrB[SizeX][SizeY], uint32_t output[SizeY])
+void calcRowSums(uint32_t arrA[MatSize][MatSize], uint32_t arrB[MatSize][MatSize], uint32_t output[MatSize])
 {
-	for (int i{0}; i < SizeY; i++ ) {
-		uint32_t tempRowSum{0};
+	for (int i{ 0 }; i < MatSize; i++)
+	{
+		uint32_t tempRowSum{ 0 };
 
-		for (int j{0}; j < SizeX; j++) {
+		for (int j{ 0 }; j < MatSize; j++)
+		{
 			tempRowSum += arrA[i][j] + arrB[i][j];
 		}
 
@@ -53,32 +56,51 @@ void calcRowSums(uint32_t arrA[SizeX][SizeY], uint32_t arrB[SizeX][SizeY], uint3
 	}
 }
 
+void printArray(uint32_t arr[MatSize][MatSize])
+{
+	for (int i{ 0 }; i < MatSize; i++)
+	{
+		for (int j{ 0 }; j < MatSize; j++)
+		{
+			std::cout << arr[i][j] << "\t";
+		}
+		std::cout << "\n";
+	}
+}
+
 int main()
 {
 	// Initialize 2 arrays with 0's
-	uint32_t arrA[SizeX][SizeY]{};
-	uint32_t arrB[SizeX][SizeY]{};
+	uint32_t arrA[MatSize][MatSize]{};
+	uint32_t arrB[MatSize][MatSize]{};
 
 	do
 	{
 		// Fill arrays
 		fillArrayWithNums(arrA);
-		fillArrayWithNums(arrB);
+		std::cout << "\tarray A\n";
+		printArray(arrA);
 
-		uint32_t columnSums[SizeX]{};
-		uint32_t rowSums[SizeY]{};
+		fillArrayWithNums(arrB);
+		std::cout << "\tarray B\n";
+		printArray(arrB);
+
+		uint32_t columnSums[MatSize]{};
+		uint32_t rowSums[MatSize]{};
 
 		calcColumnSums(arrA, arrB, columnSums);
 		calcRowSums(arrA, arrB, rowSums);
 
-		int count{0};
-		for (uint32_t sum : columnSums) {
+		int count{ 0 };
+		for (uint32_t sum : columnSums)
+		{
 			std::cout << "Column " << count << " sum is " << sum << "\n";
 			count++;
 		}
 
 		count = 0;
-		for (uint32_t sum : rowSums) {
+		for (uint32_t sum : rowSums)
+		{
 			std::cout << "Row " << count << " sum is " << sum << "\n";
 			count++;
 		}
