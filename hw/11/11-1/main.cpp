@@ -19,18 +19,18 @@ bool tryAgain()
 	return answer == 'y';
 }
 
-void fillNames(std::string *arr[2][g_NamesLength])
+void fillNames(std::string* arr[2][g_NamesLength], std::string names[g_NamesLength])
 {
-	arr[0][0] = (std::string*)"Titas";
-	arr[0][1] = (std::string*)"Yasin";
-	arr[0][2] = (std::string*)"Kyrylo";
-	arr[0][3] = (std::string*)"Hanna";
-	arr[0][4] = (std::string*)"Ivan";
-	arr[0][5] = (std::string*)"Bogdan";
-	arr[0][6] = (std::string*)"Sasha";
-	arr[0][7] = (std::string*)"Timur";
-	arr[0][8] = (std::string*)"Alex";
-	arr[0][9] = (std::string*)"Kay";
+	arr[0][0] = &names[0];
+	arr[0][1] = &names[1];
+	arr[0][2] = &names[2];
+	arr[0][3] = &names[3];
+	arr[0][4] = &names[4];
+	arr[0][5] = &names[5];
+	arr[0][6] = &names[6];
+	arr[0][7] = &names[7];
+	arr[0][8] = &names[8];
+	arr[0][9] = &names[9];
 }
 
 void fillAges(std::string ages[g_NamesLength])
@@ -41,31 +41,32 @@ void fillAges(std::string ages[g_NamesLength])
 	}
 }
 
-void printBigArray(std::string *arr[2][g_NamesLength]) {
-	for (auto item : *arr) {
-		std::cout << &item << "\n";
+void printBigArray(std::string* arr[2][g_NamesLength])
+{
+	for (int i{ 0 }; i < g_NamesLength; i++)
+	{
+		std::cout << i << ": " << **&arr[0][i] << ", Age " << **&*&arr[1][i] << "\n";
 	}
 
-//	for (int i{0}; i < g_NamesLength; i++) {
-//		std::cout << i << ": " << *arr[0][i] << " , Age " << *arr[1][i];
-//	}
+	std::cout << std::endl;
 }
 
 int main()
 {
+	std::string names[g_NamesLength]{ "Titas", "Yasin", "Kyrylo", "Hanna", "Ivan",
+									  "Bogdan", "Sasha", "Timur", "Alex", "Kay" };
 	std::string* namesAges[2][g_NamesLength]{};
 	std::string ages[g_NamesLength]{};
-	//std::pair<std::string, uint32_t> namesAges[2][g_NamesLength]{};
-
-	fillNames(namesAges);
-
-	printBigArray(namesAges);
+	fillNames(namesAges, names);
 
 	do
 	{
 		fillAges(ages);
-		
-		*namesAges[1] = ages;
+
+		for (int i{ 0 }; i < g_NamesLength; i++)
+		{
+			namesAges[1][i] = &ages[i];
+		}
 
 		printBigArray(namesAges);
 
