@@ -45,7 +45,7 @@ void printBigArray(std::string* arr[2][g_NamesLength])
 {
 	for (int i{ 0 }; i < g_NamesLength; i++)
 	{
-		std::cout << i << ": " << **&arr[0][i] << ", Age " << **&*&arr[1][i] << "\n";
+		std::cout << i << ": " << *arr[0][i] << ", Age " << *arr[1][i] << "\n";
 	}
 
 	std::cout << std::endl;
