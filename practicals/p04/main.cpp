@@ -10,7 +10,7 @@ struct student
 	std::string name;
 	uint32_t subjects[12]{};
 
-	student(const std::string in_name, const std::vector<uint32_t>& in_subjects)
+	student(const std::string& in_name, const std::vector<uint32_t>& in_subjects)
 	{
 		name = in_name;
 
@@ -33,7 +33,7 @@ student createRandomStudent()
 		grades.push_back((rand() % 6) + 5);
 	}
 
-	return student(name, grades);
+	return { name, grades };
 }
 
 void printStudent(const student& input)
@@ -64,7 +64,7 @@ int main()
 	list_of_students.push_back(student("Unsatisfactory student", { 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 }));
 
 	std::cout << "All Students\n";
-	for (auto var : list_of_students)
+	for (const student& var : list_of_students)
 	{
 		printStudent(var);
 	}
@@ -77,7 +77,7 @@ int main()
 	std::vector<student> unsatisfactory{};
 
 	// Calculations
-	for (student st : list_of_students)
+	for (const student& st : list_of_students)
 	{
 		uint32_t num_grades_10_or_9{};
 		uint32_t num_grades_8_or_7{};
@@ -89,20 +89,14 @@ int main()
 			switch (st.subjects[i])
 			{
 			case 10:
-				num_grades_10_or_9 += subject_credits[i];
-				break;
 			case 9:
 				num_grades_10_or_9 += subject_credits[i];
 				break;
 			case 8:
-				num_grades_8_or_7 += subject_credits[i];
-				break;
 			case 7:
 				num_grades_8_or_7 += subject_credits[i];
 				break;
 			case 6:
-				num_grades_6_or_5 += subject_credits[i];
-				break;
 			case 5:
 				num_grades_6_or_5 += subject_credits[i];
 				break;
@@ -133,21 +127,21 @@ int main()
 	}
 
 	std::cout << " ALL CAT 1 STUDENTS\n";
-	for (student st : cat_1)
+	for (const student& st : cat_1)
 	{
 		printStudent(st);
 	}
 	std::cout << "\n\n";
 
 	std::cout << " ALL CAT 2 STUDENTS\n";
-	for (student st : cat_2)
+	for (const student& st : cat_2)
 	{
 		printStudent(st);
 	}
 	std::cout << "\n\n";
 
 	std::cout << " ALL CAT 3 STUDENTS\n";
-	for (student st : cat_3)
+	for (const student& st : cat_3)
 	{
 		printStudent(st);
 	}
