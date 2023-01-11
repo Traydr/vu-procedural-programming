@@ -84,7 +84,8 @@ float readFloat()
 	return input;
 }
 
-void printHeader() {
+void printHeader()
+{
 	std::cout << std::setw(4) << "year" << "\t";
 	std::cout << std::setw(10) << "month" << "\t";
 	std::cout << std::setw(10) << "consumption" << "\t";
@@ -96,7 +97,15 @@ void printHeader() {
 	std::cout << std::endl;
 }
 
-void printStats(uint32_t year, uint32_t month, float consumption, float production, float price, float storagePrice, float balance, float balanceWithReimbursement) {
+void printStats(uint32_t year,
+	uint32_t month,
+	float consumption,
+	float production,
+	float price,
+	float storagePrice,
+	float balance,
+	float balanceWithReimbursement)
+{
 	std::cout << std::setw(4) << year << "\t";
 	std::cout << std::setw(10) << mapIntToMonth(month) << "\t";
 	std::cout << std::setw(10) << consumption << "\t";
@@ -154,11 +163,13 @@ int main()
 	float electricityStored{};
 
 	// Fill in how much electricity is stored
-	for (monthlyElectricityStats stats : data) {
+	for (monthlyElectricityStats stats : data)
+	{
 		electricityStored += stats.produced;
 		electricityStored -= stats.consumed;
 
-		if (electricityStored < 0) {
+		if (electricityStored < 0)
+		{
 			electricityStored = 0;
 		}
 	}
@@ -183,13 +194,15 @@ int main()
 		if (balance > 0)
 		{
 			isTargetReached = true;
-			std::cout << "\n\nREPAID FULL COST AT YEAR:" << currentYear << " AND MONTH: " << mapIntToMonth(currentMonth) << "\n\n";
+			std::cout << "\n\nREPAID FULL COST AT YEAR:" << currentYear << " AND MONTH: " << mapIntToMonth(currentMonth)
+					  << "\n\n";
 			break;
 		}
 		else if (balanceWithReimbursement > 0 && !isRepayTriggered)
 		{
 			isRepayTriggered = true;
-			std::cout << "\n\nREPAID COST WITH REIMBURSEMENT AT YEAR:" << currentYear << " AND MONTH: " << mapIntToMonth(currentMonth) << "\n\n";
+			std::cout << "\n\nREPAID COST WITH REIMBURSEMENT AT YEAR:" << currentYear << " AND MONTH: "
+					  << mapIntToMonth(currentMonth) << "\n\n";
 		}
 
 		// Calculate data
@@ -215,21 +228,28 @@ int main()
 
 		// Update balance
 		float changeInBalance{};
-		float changeInProduction{currentProduction - currentConsumption + electricityStored};
+		float changeInProduction{ currentProduction - currentConsumption + electricityStored };
 
-		if (changeInProduction >= 0) {
+		if (changeInProduction >= 0)
+		{
 			// If storage + production was more than consumption
 			changeInBalance += currentConsumption * (currentElectricityPrice - currentElectricityStoragePrice);
 
 			// Calculate change in electricity storage
-			if (currentConsumption > currentProduction) {
+			if (currentConsumption > currentProduction)
+			{
 				electricityStored -= currentConsumption - currentProduction;
-			} else if (currentConsumption < currentProduction) {
+			}
+			else if (currentConsumption < currentProduction)
+			{
 				electricityStored += currentProduction - currentConsumption;
 			}
-		} else if (changeInProduction < 0) {
+		}
+		else if (changeInProduction < 0)
+		{
 			// If storage + production was less than consumption
-			changeInBalance += (currentProduction + electricityStored) * (currentElectricityPrice - currentElectricityStoragePrice);
+			changeInBalance +=
+				(currentProduction + electricityStored) * (currentElectricityPrice - currentElectricityStoragePrice);
 			changeInBalance -= -(changeInProduction) * currentElectricityPrice;
 			electricityStored = 0;
 		}
@@ -238,8 +258,8 @@ int main()
 		balanceWithReimbursement += changeInBalance;
 
 		// Displaying data
-		printStats(currentYear, currentMonth, currentConsumption,currentProduction,
-			currentElectricityPrice,currentElectricityStoragePrice, balance, balanceWithReimbursement);
+		printStats(currentYear, currentMonth, currentConsumption, currentProduction,
+			currentElectricityPrice, currentElectricityStoragePrice, balance, balanceWithReimbursement);
 
 		// Increment month
 		if (currentMonth == 11)
